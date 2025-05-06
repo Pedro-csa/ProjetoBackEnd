@@ -1,0 +1,118 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+{% block content %}
+
+<html lang="pt-BR" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <style>
+    .dashboard-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 5em 0.5em;
+    }
+
+    .market-block {
+      width: 260px;
+      height: 110px;
+      padding: 1.5em;
+      background: #999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .market-left h3 {
+      color: #fff;
+      font-size: 2em;
+      margin: 0;
+    }
+
+    .market-left h4 a {
+      font-size: 1.1em;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .market-right img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .block-1 {
+      background: #1C5253;
+    }
+    .block-1:hover {
+      background: #153e3e;
+    }
+
+    .block-2 {
+      background: #f8ae0c;
+    }
+    .block-2 h3,
+    .block-2 h4 a {
+      color: #000;
+    }
+    .block-2:hover {
+      background: #b38421;
+    }
+
+    .block-3 {
+      background: #306B34;
+    }
+    .block-3:hover {
+      background: #255527;
+    }
+
+    footer.container a {
+      font-family: Tahoma, sans-serif;
+      font-weight: bold;
+      font-size: 25px;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    <div class="market-block block-3">
+      <div class="market-left">
+        <h4><a href="{% url 'view_consulta' %}">Consultas</a></h4>
+      </div>
+      <div class="market-right">
+        <img src="{% static 'images/clock.png' %}" alt="Ícone Consulta">
+      </div>
+    </div>
+
+    <div class="market-block block-1">
+      <div class="market-left">
+        <h4><a href="{% url 'view_medico' %}">Médicos</a></h4>
+      </div>
+      <div class="market-right">
+        <img src="{% static 'images/doctor.png' %}" alt="Ícone Médico">
+      </div>
+    </div>
+
+    <div class="market-block block-2">
+      <div class="market-left">
+        <h4><a href="{% url 'view_paciente' %}">Pacientes</a></h4>
+      </div>
+      <div class="market-right">
+        <img src="{% static 'images/paciente.png' %}" alt="Ícone Paciente">
+      </div>
+    </div>
+  </div>
+
+  <br><br><br>
+  <footer class="container mt-5 text-center">
+    <a>Pedro César - RU 4442985</a>
+  </footer>
+
+</body>
+</html>
+
+{% endblock content %}

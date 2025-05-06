@@ -1,0 +1,103 @@
+{% extends 'nav.html' %}
+{% load static %}
+{% block body %}
+
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Acesso</title>
+
+  <style type="text/css">
+    body {
+      color: #aa082e;
+      background-color: white;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    a:link {
+      text-decoration: none;
+    }
+
+    .note {
+      text-align: center;
+      height: 80px;
+      background: linear-gradient(90deg, #0f2027, #203a43, #f8ae0c);
+      color: #fff;
+      font-weight: bold;
+      line-height: 80px;
+    }
+
+    .form-content {
+      padding: 4%;
+      border: 1px solid #ced4da;
+      margin-bottom: 1%;
+      text-align : center;
+    }
+
+    .form-control {
+      border-radius: 1.5rem;
+      text-align : center;
+    }
+
+    .btnSubmit {
+      border: none;
+      border-radius: 1.5rem;
+      padding: 1%;
+      width: 30%;
+      cursor: pointer;
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+{% if error == "no" %}
+     <script>
+	   alert('Login Realizado');
+     window.location = "{% url 'admin_home' %}";
+
+     </script>
+{% endif %}
+
+{% if error == "yes" %}
+     <script>
+	    alert('Usuário ou Senha incorretos. Tente Novamente');
+     </script>
+{% endif %}
+
+<br><br><br><br>
+    <form method="post">
+    {% csrf_token %}
+    <div class="container register-form mt-2" style="width : 600px;">
+      <div class="form">
+        <div class="note">
+          <p>Acesso ao Sistema</p>
+        </div>
+
+        <div class="form-content">
+          <div class="row mt-5">
+
+            <div class="col-md-12">
+              <div class="form-group">
+                  <input type="text" name="usuario" class="form-control py-3" placeholder="Insira seu Usuário">
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <input type="password" name="senha" class="form-control py-3" placeholder="Insira sua Senha"><br>
+              </div>
+            </div>
+
+          </div>
+          <button type="submit" class="btnSubmit">Login</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+
+{% endblock%}

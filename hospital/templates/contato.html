@@ -1,0 +1,40 @@
+{% extends 'nav.html' %}
+{% load static %}
+{% block body %}
+
+{% if enviado %}
+<script>
+  alert('Mensagem enviada com sucesso!');
+</script>
+{% endif %}
+
+<section style="background-color: #ffffff; height: 650px;">
+  <div class="container py-5">
+    <div class="card mx-auto" style="max-width: 600px;">
+      <div class="card-body">
+        <h2 class="text-center mb-4">Entre em Contato</h2>
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label>Nome</label>
+            <input type="text" name="name" class="form-control" placeholder="Seu nome" required>
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" name="email" class="form-control" placeholder="seuemail@exemplo.com" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <input type="submit" value="Enviar" class="form-control btn btn-primary">
+            </div>
+            <div class="form-group col">
+              <input type="reset" value="Limpar" class="form-control btn btn-secondary">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

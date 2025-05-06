@@ -1,0 +1,79 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<br><br><br>
+<div class="container card shadow m-5" style="margin-left: 0;">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid orange">Agendar Consulta</h5>
+        <br>
+
+        {% if error == "no" %}
+        <script>
+            alert('Consulta agendada com sucesso!');
+            window.location = ('{% url "view_consulta" %}');
+        </script>
+        {% endif %}
+
+        {% if error == "yes" %}
+        <script>
+            alert('Algo deu errado. Tente novamente.');
+        </script>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Médico</label>
+                        <select name="medico" class="form-control" required>
+                            <option value="" disabled selected>Selecione o médico</option>
+                            {% for i in medicos %}
+                            <option value="{{ i.id_medico }}">{{ i.nome }} [{{ i.id_medico }}]</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Paciente</label>
+                        <select name="paciente" class="form-control" required>
+                            <option value="" disabled selected>Selecione o paciente</option>
+                            {% for i in pacientes %}
+                            <option value="{{ i.id_paciente }}">{{ i.nome }} [{{ i.id_paciente }}]</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input type="date" name="data_consulta" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Hora</label>
+                        <input type="time" name="hora_consulta" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea name="descricao" class="form-control" rows="3" placeholder="Ex: Retorno, Avaliação, etc."></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+            <input type="submit" value="Agendar Consulta" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+{% endblock content %}

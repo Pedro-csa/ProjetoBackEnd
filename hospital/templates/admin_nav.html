@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>VidaPlus</title>
+
+  <!-- Bootstrap + Fontes -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+  <!-- Estilo Global -->
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+
+  <style>
+    a:link, a, a:hover {
+      text-decoration: none;
+      color: white;
+    }
+
+    body {
+      padding-left: 240px;
+      padding-top: 50px;
+    }
+
+    .menu {
+      background: linear-gradient(#f8ae0c, #203a43, #0f2027);
+      height: 100vh;
+      width: 240px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 5;
+    }
+
+    .menu .avatar {
+      text-align: center;
+      padding: 4em 0.5em;
+    }
+
+    .menu .avatar img {
+      width: 100px;
+    }
+
+    .menu .avatar h6 {
+      color: white;
+      margin-top: 10px;
+    }
+
+    .menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu ul li {
+      padding: 1em 1em 1em 2em;
+      font-size: 1em;
+      font-weight: 500;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .menu ul li:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .menu ul li img {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media screen and (max-width: 900px) and (min-width: 400px) {
+      body {
+        padding-left: 90px;
+      }
+      .menu {
+        width: 90px;
+      }
+      .menu .avatar img {
+        width: 60px;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      body {
+        padding-left: 0;
+      }
+      .menu {
+        width: 230px;
+        transform: translate3d(-230px, 0, 0);
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="menu" tabindex="0">
+    <header class="avatar">
+      <img src="{% static 'images/usuario.png' %}" alt="Usuário" />
+      <h6>Admin</h6>
+    </header>
+
+    <ul>
+      <!-- Paciente -->
+      <li tabindex="0" class="icon-paciente nav-item dropdown">
+        <img src="{% static 'images/paciente.png' %}" alt="Paciente">
+        <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Paciente</a>
+        <div class="dropdown-menu">
+          <a href="{% url 'add_paciente' %}" class="dropdown-item">Adicionar Paciente</a>
+          <a href="{% url 'view_paciente' %}" class="dropdown-item">Ver Pacientes</a>
+        </div>
+      </li>
+
+      <!-- Médico -->
+      <li tabindex="0" class="icon-medico nav-item dropdown">
+        <img src="{% static 'images/doctor.png' %}" alt="Médico">
+        <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Médico</a>
+        <div class="dropdown-menu">
+          <a href="{% url 'add_medico' %}" class="dropdown-item">Adicionar Médico</a>
+          <a href="{% url 'view_medico' %}" class="dropdown-item">Ver Médicos</a>
+        </div>
+      </li>
+
+      <!-- Consulta -->
+      <li tabindex="0" class="icon-consulta nav-item dropdown">
+        <img src="{% static 'images/icon-daily.png' %}" alt="Consulta">
+        <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Consulta</a>
+        <div class="dropdown-menu">
+          <a href="{% url 'add_consulta' %}" class="dropdown-item">Adicionar Consulta</a>
+          <a href="{% url 'view_consulta' %}" class="dropdown-item">Ver Consultas</a>
+        </div>
+      </li>
+
+      <!-- Voltar -->
+      <li tabindex="0">
+        <img src="{% static 'images/icon-return.png' %}" alt="Voltar">
+        <a href="{% url 'admin_home' %}" class="nav-link text-light">Voltar ao início</a>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Barra superior -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background: linear-gradient(90deg, #f8ae0c, #203a43, #0f2027)">
+      <a href="#" class="navbar-brand" style="font-family: Tahoma, sans-serif; font-weight: bold;">VidaPlus - Gestão Hospitalar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+        <a href="{% url 'logout' %}" class="nav-item nav-link text-white"><i class="logout"></i> Sair</a>
+      </div>
+    </nav>
+
+    <!-- Conteúdo da página -->
+    {% block content %}{% endblock content %}
+  </main>
+</body>
+</html>

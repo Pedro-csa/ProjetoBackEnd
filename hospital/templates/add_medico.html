@@ -1,0 +1,68 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<br><br><br>
+<div class="container card shadow m-5" style="margin-left: 0;">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid orange">Adicionar Médico</h5>
+        <br>
+
+        {% if error == "no" %}
+        <script>
+            alert('Médico salvo com sucesso!');
+            window.location = ('{% url "view_medico" %}');
+        </script>
+        {% endif %}
+
+        {% if error == "yes" %}
+        <script>
+            alert('Algo deu errado, tente novamente.');
+        </script>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Nome do Médico</label>
+                        <input type="text" name="nome" class="form-control" placeholder="Digite o nome do médico" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>CRM</label>
+                    <input type="text" name="crm" class="form-control" required>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Número de Contato</label>
+                        <input type="text" name="telefone" class="form-control" placeholder="Digite o telefone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+            
+                <div class="form-group">
+                    <label>Data de Contratação</label>
+                    <input type="date" name="data_contratacao" class="form-control" required>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Especialização</label>
+                        <input type="text" name="especialidade" class="form-control" placeholder="Digite a especialização" required>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <input type="submit" value="Cadastrar" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+{% endblock content %}

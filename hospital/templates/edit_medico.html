@@ -1,0 +1,54 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<br><br><br>
+<div class="container card shadow m-5" style="margin-left: 0;">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid orange">Editar Médico</h5>
+        <br>
+
+        {% if error == "no" %}
+        <script>
+            alert('Registro do médico atualizado com sucesso!');
+            window.location = ('{% url "view_medico" %}');
+        </script>
+        {% endif %}
+
+        {% if error == "yes" %}
+        <script>
+            alert('Algo deu errado. Tente novamente.');
+        </script>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Nome do Médico</label>
+                        <input type="text" name="nome" class="form-control" value="{{ medico.nome }}" required>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Contato</label>
+                        <input type="text" name="telefone" class="form-control" value="{{ medico.telefone }}" required>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Especialidade</label>
+                        <input type="text" name="especialidade" class="form-control" value="{{ medico.especialidade }}" required>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <input type="submit" value="Atualizar" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+{% endblock content %}
