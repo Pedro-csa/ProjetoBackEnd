@@ -1,8 +1,9 @@
 from pathlib import Path
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+# Chave de criptografia do Django;
 SECRET_KEY = 'django-insecure-s&!oztdvi5x_hb8f)h=r-@&d4&-37jcy30+xm8ix0k_s@awndx'
 
 
@@ -10,7 +11,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+# Aplicações do projeto, como aplicativo principal, autenticação e afins;
 INSTALLED_APPS = [
     'hospital',
     'django.contrib.admin',
@@ -21,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# Processamento de requisições e respostas;
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -31,8 +33,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Caminho para o arquivo de URLs do projeto;
 ROOT_URLCONF = 'vidaplus.urls'
 
+# Configuração dos templates;
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -51,7 +55,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vidaplus.wsgi.application'
 
-
+# Configuração do banco de dados PostgreSQL;
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -63,6 +67,7 @@ DATABASES = {
     }
 }
 
+# Validação de senhas;
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -78,7 +83,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+# Configurações de localização;
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -89,6 +94,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Diretório padrão para os arquivos estáticos (CSS,Imagens e JS)
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

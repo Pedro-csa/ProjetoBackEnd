@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
   <title>VidaPlus</title>
 
-  <!-- Bootstrap + Fontes -->
+  <!-- Scripts Bootstrap, jQuery, Popper e Fontes -->
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
-  <!-- Estilo Global -->
+  <!-- Estilo global da tela -->
   <link rel="stylesheet" href="{% static 'style.css' %}">
 
   <style>
@@ -76,28 +76,7 @@
       height: 20px;
     }
 
-    @media screen and (max-width: 900px) and (min-width: 400px) {
-      body {
-        padding-left: 90px;
-      }
-      .menu {
-        width: 90px;
-      }
-      .menu .avatar img {
-        width: 60px;
-      }
-    }
-
-    @media screen and (max-width: 400px) {
-      body {
-        padding-left: 0;
-      }
-      .menu {
-        width: 230px;
-        transform: translate3d(-230px, 0, 0);
-        transition: all 0.3s ease-in-out;
-      }
-    }
+  
   </style>
 </head>
 

@@ -231,8 +231,29 @@ def Delete_Paciente(request,pid):
     paciente.delete()
     return redirect('view_paciente')
 
-#Bloco da Consulta
 @csrf_exempt
+def get_paciente(request, pid):
+    if request.method == 'GET':
+        try:
+            paciente = Paciente.objects.get(id_paciente=pid)
+            dados = {
+                'id': paciente.id_paciente,
+                'nome': paciente.nome,
+                'cpf': paciente.cpf,
+                'email': paciente.email,
+                'telefone': paciente.telefone,
+                'endereco': paciente.endereco,
+                'data_nascimento': paciente.data_nascimento.strftime('%Y-%m-%d'),
+                'data_cadastro': paciente.data_cadastro.strftime('%Y-%m-%d %H:%M:%S') if paciente.data_cadastro else None
+            }
+            return JsonResponse(dados, status=200)
+        except Paciente.DoesNotExist:
+            return JsonResponse({'erro': 'Paciente não encontrado'}, status=404)
+    return JsonResponse({'erro': 'Método não permitido'}, status=405)
+
+    
+#Bloco da Consulta
+
 def add_consulta(request):
     error = ""
     medicos = Medico.objects.all()
