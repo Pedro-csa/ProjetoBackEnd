@@ -6,6 +6,9 @@ Construído utilizando a linguagem Python, juntamente com o framework Django e o
 Durante o desenvolvimento, foram aplicadas boas práticas do desenvolvimento, como modelagem de dados com ORM, separação de responsabilidades entre camadas e autenticação de usuários. 
 A aplicação permite o gerenciamento completo via formulários HTML tradicionais ou requisições externas em formato JSON, facilitando a integração com outras interfaces e ferramentas como o Postman que foi o utilizado para testes.
 
+O foco principal do desenvolvimento é centrado em quatro classes fundamentais para a lógica do sistema: Usuario, Medico, Paciente e Consulta.
+Sendo o Usuario o administrador do sistema, o qual controla o CRUD de Médico, Paciente e Consulta.
+
 **Para a execução do projeto:**
 Deve ser criado um admin (super user), para isso basta utilizar o seguinte comando no CMD:
 
