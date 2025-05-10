@@ -5,6 +5,8 @@
 <html lang="pt-BR" dir="ltr">
 <head>
   <meta charset="utf-8">
+  
+<!-- Estilos adicionais para as telas -->
   <style>
     .dashboard-container {
       display: flex;
@@ -79,6 +81,8 @@
 <body>
 
   <div class="dashboard-container">
+
+    <!-- Bloco de Consultas -->
     <div class="market-block block-3">
       <div class="market-left">
         <h4><a href="{% url 'view_consulta' %}">Consultas</a></h4>
@@ -88,6 +92,7 @@
       </div>
     </div>
 
+    <!-- Bloco de Médico -->
     <div class="market-block block-1">
       <div class="market-left">
         <h4><a href="{% url 'view_medico' %}">Médicos</a></h4>
@@ -97,6 +102,7 @@
       </div>
     </div>
 
+    <!-- Bloco de Pacientes -->
     <div class="market-block block-2">
       <div class="market-left">
         <h4><a href="{% url 'view_paciente' %}">Pacientes</a></h4>

@@ -8,6 +8,7 @@
         <h5 class="p-2" style="border-bottom: 2px solid orange">Editar Médico</h5>
         <br>
 
+        <!-- Verifica a variável e exibe a mensagen de alerta correspondente -->
         {% if error == "no" %}
         <script>
             alert('Registro do médico atualizado com sucesso!');
@@ -21,6 +22,7 @@
         </script>
         {% endif %}
 
+        <!-- Formulário para editar as informações do médico -->
         <form method="post">
             {% csrf_token %}
             <div class="form-row">

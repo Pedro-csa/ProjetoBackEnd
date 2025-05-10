@@ -8,6 +8,7 @@
         <h5 class="p-2" style="border-bottom: 2px solid orange">Consultas Agendadas</h5>
         <br>
 
+        <!-- Tabela que exibe as consultas agendadas -->
         <div class="table-responsive">
             <table id="example" class="table table-striped table-bordered table-sm" style="width: 100%">
                 <thead class="thead-dark">
@@ -30,6 +31,7 @@
                         <td>{{ i.data_consulta|time:"H:i" }}</td>
                         <td>{{ i.status }}</td>
                         <td>
+                            <!-- Link para exclusão de uma consulta -->
                             <a href="{% url 'delete_consulta' i.id_consulta %}" onclick="return confirm('Deseja realmente excluir esta consulta?')" class="btn btn-danger btn-sm">Excluir</a>
                         </td>
                     </tr>

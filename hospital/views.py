@@ -10,7 +10,7 @@ import traceback
 import json
 
 
-#Bloco Inicial
+# Bloco Inicial
 def adminlogin(request):
 
     error = ""
@@ -66,7 +66,7 @@ def Logout(request):
     logout(request)
     return redirect('index')
 
-#Bloco do Médico
+# Bloco do Médico com as funções CRUD
 @csrf_exempt
 def add_medico(request):
     if request.method == 'POST':
@@ -76,6 +76,7 @@ def add_medico(request):
             else:
                 data = request.POST
 
+            # Coleta dados do formulário ou JSON
             nome = data.get('nome')
             telefone = data.get('telefone')
             especialidade = data.get('especialidade')
@@ -83,6 +84,7 @@ def add_medico(request):
             email = data.get('email')
             data_contratacao = data.get('data_contratacao')
 
+            # Cria dentro do banco de dados
             medico = Medico.objects.create(
                 nome=nome,
                 telefone=telefone,
@@ -92,11 +94,10 @@ def add_medico(request):
                 data_contratacao=data_contratacao
             )
 
-            # Se for JSON, retorna JSON:
+            # Resposta JSON ou Redenzização
             if request.headers.get('Content-Type') == 'application/json':
                 return JsonResponse({'mensagem': 'Médico criado com sucesso', 'id': medico.id_medico}, status=201)
 
-            # Se for formulário HTML, renderiza a página:
             return render(request, 'add_medico.html', {'error': 'no'})
 
         except Exception as e:
@@ -109,6 +110,8 @@ def add_medico(request):
     return render(request, 'add_medico.html')
 
 def view_medico(request):
+
+    # Lista de médicos
     if not request.user.is_staff:
         return redirect('login')
     doc = Medico.objects.all()
@@ -116,6 +119,8 @@ def view_medico(request):
     return render(request,'view_medico.html', d)
 
 def edit_medico(request, pid):
+
+    # Edita um médico já existente
     if not request.user.is_authenticated:
         return redirect('login')
     error = ""
@@ -135,6 +140,8 @@ def edit_medico(request, pid):
     return render(request, 'edit_medico.html', {'medico': medico, 'error': error})
 
 def Delete_medico(request, pid):
+
+    # Deleta um médico
     if not request.user.is_staff:
         return redirect('login')
     
@@ -146,7 +153,7 @@ def Delete_medico(request, pid):
     
     return redirect('view_medico')
 
-#Bloco do Paciente
+# Bloco do Paciente com as funções CRUD
 @csrf_exempt
 def add_paciente(request):
     if not request.user.is_authenticated and request.content_type != 'application/json':
@@ -154,7 +161,7 @@ def add_paciente(request):
 
     if request.method == 'POST':
         try:
-            # Se o conteúdo for JSON, extraímos com json.loads
+            # Coleta dados do formulário ou JSON
             if request.headers.get('Content-Type') == 'application/json':
                 data = json.loads(request.body)
                 nome = data.get('nome')
@@ -164,7 +171,7 @@ def add_paciente(request):
                 email = data.get('email')
                 endereco = data.get('endereco')
             else:
-                # Caso contrário, tratamos como formulário
+
                 nome = request.POST.get('nome')
                 data_nascimento = request.POST.get('data_nascimento')
                 cpf = request.POST.get('cpf')
@@ -172,7 +179,7 @@ def add_paciente(request):
                 email = request.POST.get('email')
                 endereco = request.POST.get('endereco')
 
-            # Cria o paciente
+            # Cria dentro do banco de dados
             paciente = Paciente.objects.create(
                 nome=nome,
                 data_nascimento=data_nascimento,
@@ -183,7 +190,6 @@ def add_paciente(request):
                 data_cadastro=timezone.now()
             )
 
-            # Resposta adequada conforme origem da requisição
             if request.headers.get('Content-Type') == 'application/json':
                 return JsonResponse({'mensagem': 'Paciente criado com sucesso', 'id': paciente.id_paciente}, status=201)
             else:
@@ -195,10 +201,11 @@ def add_paciente(request):
                 return JsonResponse({'erro': 'Erro ao cadastrar paciente'}, status=400)
             return render(request, 'add_paciente.html', {'error': 'yes'})
 
-    # GET: retorna normalmente a tela
     return render(request, 'add_paciente.html')
 
 def view_paciente(request):
+
+    # Lista um paciente existente
     if not request.user.is_staff:
         return redirect('login')
     pat = Paciente.objects.all()
@@ -206,6 +213,8 @@ def view_paciente(request):
     return render(request,'view_paciente.html', d)
 
 def edit_paciente(request,pid):
+
+    # Edita um paciente
     error = ""
     if not request.user.is_authenticated:
         return redirect('login')
@@ -225,34 +234,15 @@ def edit_paciente(request,pid):
     return render(request, 'edit_paciente.html', locals())
 
 def Delete_Paciente(request,pid):
+
+    # Deleta um paciente
     if not request.user.is_staff:
         return redirect('login')
     paciente = get_object_or_404(Paciente, id_paciente=pid)
     paciente.delete()
     return redirect('view_paciente')
-
-@csrf_exempt
-def get_paciente(request, pid):
-    if request.method == 'GET':
-        try:
-            paciente = Paciente.objects.get(id_paciente=pid)
-            dados = {
-                'id': paciente.id_paciente,
-                'nome': paciente.nome,
-                'cpf': paciente.cpf,
-                'email': paciente.email,
-                'telefone': paciente.telefone,
-                'endereco': paciente.endereco,
-                'data_nascimento': paciente.data_nascimento.strftime('%Y-%m-%d'),
-                'data_cadastro': paciente.data_cadastro.strftime('%Y-%m-%d %H:%M:%S') if paciente.data_cadastro else None
-            }
-            return JsonResponse(dados, status=200)
-        except Paciente.DoesNotExist:
-            return JsonResponse({'erro': 'Paciente não encontrado'}, status=404)
-    return JsonResponse({'erro': 'Método não permitido'}, status=405)
-
     
-#Bloco da Consulta
+# Bloco da Consulta com as funções CRUD
 
 def add_consulta(request):
     error = ""
@@ -266,6 +256,7 @@ def add_consulta(request):
             else:
                 data = request.POST
 
+            # Coleta dados do formulário ou JSON
             id_medico = data.get('medico')
             id_paciente = data.get('paciente')
             data_str = data.get('data_consulta')
@@ -276,6 +267,7 @@ def add_consulta(request):
             medico = get_object_or_404(Medico, id_medico=id_medico)
             paciente = get_object_or_404(Paciente, id_paciente=id_paciente)
 
+            # Cria dentro do banco de dados
             consulta = Consulta.objects.create(
                 id_medico=medico,
                 id_paciente=paciente,
@@ -298,12 +290,16 @@ def add_consulta(request):
     return render(request, 'add_consulta.html', {'error': error, 'medicos': medicos, 'pacientes': pacientes})
 
 def view_consulta(request):
+
+    # Lista as consultas existentes
     if not request.user.is_staff:
         return redirect('login')
     consultas = Consulta.objects.select_related('id_paciente', 'id_medico').all()
     return render(request, 'view_consulta.html', {'consultas': consultas})
 
 def delete_consulta(request, pid):
+
+    # Deleta uma consulta
     if not request.user.is_staff:
         return redirect('login')
     consulta = get_object_or_404(Consulta, id_consulta=pid)

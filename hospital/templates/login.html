@@ -2,15 +2,15 @@
 {% load static %}
 {% block body %}
 
-<html lang="en" dir="ltr">
+<html lang="pt-BR" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Acesso</title>
 
+  <!-- Estilos adicionais para a tela -->
   <style type="text/css">
     body {
-      color: #aa082e;
       background-color: white;
       font-family: 'Roboto', sans-serif;
     }
@@ -53,6 +53,7 @@
 </head>
 <body>
 
+<!-- Verifica a variável e exibe mensagen de alerta correspondente -->
 {% if error == "no" %}
      <script>
 	   alert('Login Realizado');
@@ -68,6 +69,8 @@
 {% endif %}
 
 <br><br><br><br>
+
+    <!-- Formulário de login -->
     <form method="post">
     {% csrf_token %}
     <div class="container register-form mt-2" style="width : 600px;">

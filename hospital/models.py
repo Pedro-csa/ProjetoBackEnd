@@ -1,5 +1,6 @@
 from django.db import models
 
+# Classe Usuario dentro do sistema 
 class Usuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     nome = models.CharField()
@@ -13,7 +14,7 @@ class Usuario(models.Model):
         managed = False
         db_table = 'usuario'
 
-
+# Classe Medico dentro do sistema 
 class Medico(models.Model):
     id_medico = models.AutoField(primary_key=True)
     nome = models.CharField()
@@ -28,7 +29,7 @@ class Medico(models.Model):
         managed = False
         db_table = 'medico'
 
-
+# Classe Paciente dentro do sistema 
 class Paciente(models.Model):
     id_paciente = models.AutoField(primary_key=True)
     nome = models.CharField()
@@ -43,7 +44,7 @@ class Paciente(models.Model):
         managed = False
         db_table = 'paciente'
 
-
+# Classe Consulta dentro do sistema 
 class Consulta(models.Model):
     id_consulta = models.AutoField(primary_key=True)
     id_paciente = models.ForeignKey('Paciente', models.DO_NOTHING, db_column='id_paciente')
@@ -57,7 +58,7 @@ class Consulta(models.Model):
         managed = False
         db_table = 'consulta'
 
-
+# Classe Prontuario dentro do sistema 
 class Prontuario(models.Model):
     id_prontuario = models.AutoField(primary_key=True)
     id_paciente = models.ForeignKey(Paciente, models.DO_NOTHING, db_column='id_paciente')

@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block content %}
+
+<!-- Verifica a variável e exibe a mensagen de alerta correspondente -->
 {% if error == "no" %}
     <script>
         alert('Dados do Paciente atualizados!');
@@ -21,6 +23,8 @@
         <h5 class="p-2" style="border-bottom: 2px solid orange">Edição de Paciente</h5>
         <br>
         <div class="container-fluid">
+
+            <!-- Formulário para editar as informações do paciente -->
             <form method="post">
                 {% csrf_token %}
                 <div class="form-row">

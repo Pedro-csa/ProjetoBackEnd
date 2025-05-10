@@ -14,6 +14,7 @@
   <!-- Estilo global da tela -->
   <link rel="stylesheet" href="{% static 'style.css' %}">
 
+  <!-- Estilos adicionais para as telas -->
   <style>
     a:link, a, a:hover {
       text-decoration: none;
@@ -88,7 +89,7 @@
     </header>
 
     <ul>
-      <!-- Paciente -->
+      <!-- Bloco de Paciente -->
       <li tabindex="0" class="icon-paciente nav-item dropdown">
         <img src="{% static 'images/paciente.png' %}" alt="Paciente">
         <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Paciente</a>
@@ -98,7 +99,7 @@
         </div>
       </li>
 
-      <!-- Médico -->
+      <!-- Bloco de Médico -->
       <li tabindex="0" class="icon-medico nav-item dropdown">
         <img src="{% static 'images/doctor.png' %}" alt="Médico">
         <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Médico</a>
@@ -108,7 +109,7 @@
         </div>
       </li>
 
-      <!-- Consulta -->
+      <!-- Bloco de Consulta -->
       <li tabindex="0" class="icon-consulta nav-item dropdown">
         <img src="{% static 'images/icon-daily.png' %}" alt="Consulta">
         <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Consulta</a>
@@ -118,7 +119,6 @@
         </div>
       </li>
 
-      <!-- Voltar -->
       <li tabindex="0">
         <img src="{% static 'images/icon-return.png' %}" alt="Voltar">
         <a href="{% url 'admin_home' %}" class="nav-link text-light">Voltar ao início</a>
@@ -127,7 +127,7 @@
   </nav>
 
   <main>
-    <!-- Barra superior -->
+    <!-- Configuração da barra superior -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background: linear-gradient(90deg, #f8ae0c, #203a43, #0f2027)">
       <a href="#" class="navbar-brand" style="font-family: Tahoma, sans-serif; font-weight: bold;">VidaPlus - Gestão Hospitalar</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">

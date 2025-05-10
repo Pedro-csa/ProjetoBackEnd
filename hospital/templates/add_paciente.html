@@ -7,6 +7,8 @@
     <div class="card-body">
         <h5 class="p-2" style="border-bottom: 2px solid orange">Adicionar Paciente</h5>
         <br>
+
+        <!-- Verificação de erro ao adicionar novo paciente -->
         {% if error == "no" %}
         <script>
             alert('Paciente salvo com sucesso!');
@@ -20,6 +22,7 @@
         </script>
         {% endif %}
 
+        <!-- Formulário para adicionar um paciente -->
         <form method="post">
             {% csrf_token %}
             <div class="form-row">
